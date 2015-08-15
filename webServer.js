@@ -21,11 +21,12 @@ var server = http.createServer(function(req, res) {
 
   } 
 
-  if (req.url == "/rule_the_world_please.png") {
-  	var action = req.pathname;
-  	console.log("!!!!!!!!!!!" + action + ":" );
+  var patt = new RegExp(".jpg");
+  if (patt.test(req.url)) {
+    var action = req.pathname;
+    console.log("Image " + action + ":" + req.url);
 
-     var img = fs.readFileSync('./rule_the_world_please.png');
+     var img = fs.readFileSync('./'+req.url);
      res.writeHead(200, {'Content-Type': 'image/gif' });
      res.end(img, 'binary');
 
